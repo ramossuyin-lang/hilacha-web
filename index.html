@@ -462,7 +462,7 @@
 </head>
 <body>
 
-    <div class="announcement-bar">Envíos seguros • Pedidos al WhatsApp: 924789997 • HILACHA</div>
+    <div class="announcement-bar">EnvÃ­os seguros Â• Pedidos al WhatsApp: 924789997 Â• HILACHA</div>
 
     <header class="store-header" onclick="showCatalog()">
         <img src="https://i.postimg.cc/B6VcjcNR/1767752107263-removebg-preview.png" alt="HILACHA" class="store-logo-img" onerror="this.outerHTML='<h1 style=\'font-size:26px;font-weight:300;text-transform:uppercase;letter-spacing:4px;margin:0;\'>HILACHA</h1>'">
@@ -471,7 +471,7 @@
     <div class="hero-banner">
         <div class="hero-slide active" style="background-image: url('https://i.postimg.cc/HxC2X4d6/Gemini-Generated-Image-vhqjkjvhqjkjvhqj-(1).jpg');">
             <div class="hero-overlay">
-                <div class="hero-subtitle">Nueva Colección</div>
+                <div class="hero-subtitle">Nueva ColecciÃ³n</div>
                 <div class="hero-title">Invierno</div>
             </div>
         </div>
@@ -500,7 +500,7 @@
             </div>
         </div>
 
-        <div id="loader">Cargando colección...</div>
+        <div id="loader">Cargando colecciÃ³n...</div>
         <div class="catalog-container" id="product-grid"></div>
     </div>
 
@@ -516,7 +516,7 @@
                 
                 <div>
                     <div class="detail-section-title">Talla disponible</div>
-                    <div class="talla-badge" id="detail-talla">Única</div>
+                    <div class="talla-badge" id="detail-talla">Ãšnica</div>
                 </div>
 
                 <div class="accordion-container">
@@ -526,30 +526,30 @@
                             <span class="accordion-icon">+</span>
                         </button>
                         <div class="accordion-content" id="detail-desc">
-                            Cargando descripción...
+                            Cargando descripciÃ³n...
                         </div>
                     </div>
 
                     <div class="accordion-item">
                         <button class="accordion-header" onclick="toggleAccordion(this)">
-                            <span>¿Cómo cuidarme?</span>
+                            <span>Â¿CÃ³mo cuidarme?</span>
                             <span class="accordion-icon">+</span>
                         </button>
                         <div class="accordion-content">
-                            • Lavar a mano o en ciclo delicado con agua fría.<br>
-                            • Usar jabón suave y no usar blanqueador.<br>
-                            • Secar a la sombra colgado, evitar secadora.<br>
-                            • Planchar a temperatura baja si es necesario.
+                            Â• Lavar a mano o en ciclo delicado con agua frÃ­a.<br>
+                            Â• Usar jabÃ³n suave y no usar blanqueador.<br>
+                            Â• Secar a la sombra colgado, evitar secadora.<br>
+                            Â• Planchar a temperatura baja si es necesario.
                         </div>
                     </div>
 
                     <div class="accordion-item">
                         <button class="accordion-header" onclick="toggleAccordion(this)">
-                            <span>Envíos</span>
+                            <span>EnvÃ­os</span>
                             <span class="accordion-icon">+</span>
                         </button>
                         <div class="accordion-content">
-                            Realizamos envíos seguros a todo el Perú. Los tiempos de despacho varían según tu ubicación una vez confirmado el pago.
+                            Realizamos envÃ­os seguros a todo el PerÃº. Los tiempos de despacho varÃ­an segÃºn tu ubicaciÃ³n una vez confirmado el pago.
                         </div>
                     </div>
                 </div>
@@ -559,7 +559,7 @@
         </div>
 
         <div class="recommendations-section">
-            <div class="recommendations-title">También te puede gustar</div>
+            <div class="recommendations-title">TambiÃ©n te puede gustar</div>
             <div class="recommendations-grid" id="recommendations-grid"></div>
         </div>
     </div>
@@ -589,7 +589,7 @@
                 populateSizeDropdown(allProducts);
                 handleURLRouting();
             } catch (err) {
-                document.getElementById('loader').innerText = "No se pudo conectar con el catálogo.";
+                document.getElementById('loader').innerText = "No se pudo conectar con el catÃ¡logo.";
                 console.error(err);
             }
         }
@@ -635,7 +635,7 @@
                                 <img src="https://i.postimg.cc/B6VcjcNR/1767752107263-removebg-preview.png" alt="Hilacha">
                             </div>
                         </div>
-                        <div class="product-size-tag">${p.talla || 'Única'}</div>
+                        <div class="product-size-tag">${p.talla || 'Ãšnica'}</div>
                         <div class="product-modelo" style="font-weight: bold;">${p.modelo || 'Pijama HILACHA'}</div>
                         <div class="product-precio" style="font-weight: bold; color: var(--text-secondary);">S/. ${Number(p.precio || 0).toLocaleString()}</div>
                     </div>
@@ -718,13 +718,13 @@
             document.getElementById('detail-img').src = p.foto;
             document.getElementById('detail-title').innerText = p.modelo || 'Pijama HILACHA';
             document.getElementById('detail-price').innerText = `S/. ${Number(p.precio || 0).toLocaleString()}`;
-            document.getElementById('detail-talla').innerText = p.talla || 'Única';
+            document.getElementById('detail-talla').innerText = p.talla || 'Ãšnica';
 
             document.getElementById('detail-desc').innerText = p.descripcion && p.descripcion.trim() !== '' 
                 ? p.descripcion 
-                : 'Conjunto de pijama diseñado con alta comodidad, suavidad y estilo exclusivo de HILACHA.';
+                : 'Conjunto de pijama diseÃ±ado con alta comodidad, suavidad y estilo exclusivo de HILACHA.';
 
-            const mensajeWp = encodeURIComponent(`Hola, me interesa la pijama *${p.modelo}* (${p.talla || 'Talla única'}) de S/. ${Number(p.precio || 0).toLocaleString()}. ¿Está disponible?`);
+            const mensajeWp = encodeURIComponent(`Hola, me interesa la pijama *${p.modelo}* (${p.talla || 'Talla Ãºnica'}) de S/. ${Number(p.precio || 0).toLocaleString()}. Â¿EstÃ¡ disponible?`);
             document.getElementById('detail-whatsapp').href = `https://wa.me/51924789997?text=${mensajeWp}`;
 
             renderRecommendations(index, p.talla);
@@ -747,7 +747,7 @@
             const shuffled = matchingProducts.sort(() => 0.5 - Math.random()).slice(0, 4);
 
             if (shuffled.length === 0) {
-                recGrid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#777; font-size:12px;">No hay más productos disponibles en esta misma talla.</p>';
+                recGrid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#777; font-size:12px;">No hay mÃ¡s productos disponibles en esta misma talla.</p>';
                 return;
             }
 
@@ -760,7 +760,7 @@
                             <img src="https://i.postimg.cc/B6VcjcNR/1767752107263-removebg-preview.png" alt="Hilacha">
                         </div>
                     </div>
-                    <div class="product-size-tag">${p.talla || 'Única'}</div>
+                    <div class="product-size-tag">${p.talla || 'Ãšnica'}</div>
                     <div class="product-modelo" style="font-weight: bold;">${p.modelo || 'Pijama HILACHA'}</div>
                     <div class="product-precio" style="font-weight: bold; color: var(--text-secondary);">S/. ${Number(p.precio || 0).toLocaleString()}</div>
                 </div>
