@@ -462,7 +462,7 @@
 </head>
 <body>
 
-    <div class="announcement-bar">Envíos seguros  Pedidos al WhatsApp: 924789997  HILACHA</div>
+    <div class="announcement-bar">Envíos seguros • Pedidos al WhatsApp: 924789997 • HILACHA</div>
 
     <header class="store-header" onclick="showCatalog()">
         <img src="https://i.postimg.cc/B6VcjcNR/1767752107263-removebg-preview.png" alt="HILACHA" class="store-logo-img" onerror="this.outerHTML='<h1 style=\'font-size:26px;font-weight:300;text-transform:uppercase;letter-spacing:4px;margin:0;\'>HILACHA</h1>'">
@@ -505,7 +505,7 @@
     </div>
 
     <div id="detail-view" class="product-detail-container">
-        <button class="back-btn" onclick="showCatalog()">? Volver a la tienda</button>
+        <button class="back-btn" onclick="showCatalog()">← Volver a la tienda</button>
         <div class="product-detail-grid">
             <div class="detail-image-wrap">
                 <img id="detail-img" src="" alt="">
@@ -536,10 +536,10 @@
                             <span class="accordion-icon">+</span>
                         </button>
                         <div class="accordion-content">
-                             Lavar a mano o en ciclo delicado con agua fría.<br>
-                             Usar jabón suave y no usar blanqueador.<br>
-                             Secar a la sombra colgado, evitar secadora.<br>
-                             Planchar a temperatura baja si es necesario.
+                            • Lavar a mano o en ciclo delicado con agua fría.<br>
+                            • Usar jabón suave y no usar blanqueador.<br>
+                            • Secar a la sombra colgado, evitar secadora.<br>
+                            • Planchar a temperatura baja si es necesario.
                         </div>
                     </div>
 
@@ -620,7 +620,7 @@
             const grid = document.getElementById('product-grid');
             
             if (!products || products.length === 0) {
-                grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#777; font-size:12px; letter-spacing:1px;">No hay productos disponibles.</p>';
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#777; font-size:12px; letter-spacing:1px;">No hay productos disponibles con estos filtros.</p>';
                 return;
             }
 
@@ -647,16 +647,12 @@
             const urlParams = new URLSearchParams(window.location.search);
             
             if (type === 'categoria') {
-                urlParams.delete('talla');
-                document.getElementById('size-select').value = "";
                 if (value === 'todos') {
                     urlParams.delete('categoria');
                 } else {
                     urlParams.set('categoria', value);
                 }
             } else if (type === 'talla') {
-                urlParams.delete('categoria');
-                document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
                 if (!value || value === 'todos') {
                     urlParams.delete('talla');
                 } else {
@@ -676,26 +672,32 @@
             const categoria = urlParams.get('categoria');
             const talla = urlParams.get('talla');
 
+            // Actualizar visualmente la navegación de categorías
             document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
-            document.getElementById('size-select').value = "";
-
-            let filtered = allProducts;
-
             if (categoria) {
                 const activeLink = document.querySelector(`.nav-link[data-category="${categoria}"]`);
                 if (activeLink) activeLink.classList.add('active');
-
-                if (categoria === 'nuevo') {
-                    filtered = allProducts.filter(p => p.esNuevo === true);
-                } else {
-                    filtered = allProducts.filter(p => p.categoria && p.categoria.toLowerCase().includes(categoria));
-                }
-            } else if (talla) {
-                document.getElementById('size-select').value = talla;
-                filtered = allProducts.filter(p => p.talla && p.talla.trim().toLowerCase() === talla.toLowerCase());
             } else {
                 const defaultLink = document.querySelector('.nav-link[data-category="todos"]');
                 if (defaultLink) defaultLink.classList.add('active');
+            }
+
+            // Actualizar visualmente el selector de tallas
+            document.getElementById('size-select').value = talla || "";
+
+            // Filtrar productos combinando ambas condiciones (Anidamiento)
+            let filtered = allProducts;
+
+            if (categoria) {
+                if (categoria === 'nuevo') {
+                    filtered = filtered.filter(p => p.esNuevo === true);
+                } else {
+                    filtered = filtered.filter(p => p.categoria && p.categoria.toLowerCase().includes(categoria));
+                }
+            }
+
+            if (talla) {
+                filtered = filtered.filter(p => p.talla && p.talla.trim().toLowerCase() === talla.toLowerCase());
             }
 
             document.getElementById('detail-view').style.display = 'none';
