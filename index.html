@@ -349,7 +349,6 @@
             margin-bottom: 8px;
         }
 
-        /* ----- ESTILOS NUEVOS PARA FILA DE TALLA Y BOTÓN DE GUÍA ----- */
         .talla-row {
             display: flex;
             align-items: center;
@@ -384,7 +383,6 @@
             color: var(--text-primary);
         }
 
-        /* ----- ESTILOS DEL MODAL (VENTANA EMERGENTE) ----- */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -421,7 +419,6 @@
             margin-top: 0;
             margin-bottom: 20px;
         }
-        /* ------------------------------------------------------------- */
 
         .accordion-container {
             display: flex;
@@ -578,7 +575,6 @@
 
                 <div>
                     <div class="detail-section-title">Talla disponible</div>
-                    <!-- AQUÍ ESTÁ EL BOTÓN DE GUÍA DE TALLAS ANIDADO JUNTO A LA TALLA -->
                     <div class="talla-row">
                         <div class="talla-badge" id="detail-talla">Única</div>
                         <button class="guia-tallas-btn" onclick="openSizeGuide()">📏 Guía de tallas</button>
@@ -635,7 +631,6 @@
         <div class="modal-content">
             <span class="close-modal" onclick="closeSizeGuide(event)">&times;</span>
             <h3 class="modal-title">Guía de Tallas</h3>
-            <!-- Reemplaza el src de esta imagen con tu tabla real de medidas cuando la tengas -->
             <img id="img-guia-tallas" src="https://i.postimg.cc/BnVf3mR4/Code-Generated-Image.png" alt="Tabla de medidas" style="width: 100%; height: auto; border-radius: 4px;">
         </div>
     </div>
@@ -863,18 +858,15 @@
             }
         }
 
-        // --- FUNCIONES NUEVAS PARA EL MODAL DE LA GUÍA DE TALLAS ---
         function openSizeGuide() {
             document.getElementById('modal-guia').style.display = 'flex';
         }
 
         function closeSizeGuide(event) {
-            // Verifica si el clic fue en la 'X' o fuera de la caja blanca para cerrarlo
             if (event.target.classList.contains('modal-overlay') || event.target.classList.contains('close-modal')) {
                 document.getElementById('modal-guia').style.display = 'none';
             }
         }
-        // -----------------------------------------------------------
 
         initCatalog();
     </script>
