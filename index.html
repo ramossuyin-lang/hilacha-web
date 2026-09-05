@@ -210,7 +210,7 @@
         .product-card:hover img {
             transform: scale(1.04);
         }
-        
+
         .badge-new {
             position: absolute;
             top: 10px;
@@ -349,6 +349,13 @@
             margin-bottom: 8px;
         }
 
+        /* ----- ESTILOS NUEVOS PARA FILA DE TALLA Y BOTÓN DE GUÍA ----- */
+        .talla-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
         .talla-badge {
             display: inline-block;
             border: 1px solid var(--text-primary);
@@ -360,6 +367,61 @@
             color: #fff;
             border-radius: 4px;
         }
+
+        .guia-tallas-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-decoration: underline;
+            cursor: pointer;
+            padding: 0;
+            transition: color 0.2s;
+        }
+        .guia-tallas-btn:hover {
+            color: var(--text-primary);
+        }
+
+        /* ----- ESTILOS DEL MODAL (VENTANA EMERGENTE) ----- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(3px);
+        }
+        .modal-content {
+            background: #fff;
+            padding: 30px 20px 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .close-modal {
+            position: absolute;
+            top: 10px; right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.2s;
+        }
+        .close-modal:hover { color: #111; }
+        .modal-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        /* ------------------------------------------------------------- */
 
         .accordion-container {
             display: flex;
@@ -492,7 +554,7 @@
                 <a class="nav-link" data-category="nuevo" onclick="applyFilter('categoria', 'nuevo', this)">Nuevo</a>
                 <a class="nav-link" data-category="bata" onclick="applyFilter('categoria', 'bata', this)">Batas</a>
             </nav>
-            
+
             <div class="size-dropdown-wrap">
                 <select class="custom-select" id="size-select" onchange="applyFilter('talla', this.value)">
                     <option value="">Filtrar por Talla</option>
@@ -513,10 +575,14 @@
             <div class="detail-info">
                 <h2 class="detail-title" id="detail-title"></h2>
                 <div class="detail-price" id="detail-price"></div>
-                
+
                 <div>
                     <div class="detail-section-title">Talla disponible</div>
-                    <div class="talla-badge" id="detail-talla">Única</div>
+                    <!-- AQUÍ ESTÁ EL BOTÓN DE GUÍA DE TALLAS ANIDADO JUNTO A LA TALLA -->
+                    <div class="talla-row">
+                        <div class="talla-badge" id="detail-talla">Única</div>
+                        <button class="guia-tallas-btn" onclick="openSizeGuide()">📏 Guía de tallas</button>
+                    </div>
                 </div>
 
                 <div class="accordion-container">
@@ -564,6 +630,16 @@
         </div>
     </div>
 
+    <!-- ESTRUCTURA DEL MODAL DE LA GUÍA DE TALLAS -->
+    <div id="modal-guia" class="modal-overlay" onclick="closeSizeGuide(event)">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeSizeGuide(event)">&times;</span>
+            <h3 class="modal-title">Guía de Tallas</h3>
+            <!-- Reemplaza el src de esta imagen con tu tabla real de medidas cuando la tengas -->
+            <img id="img-guia-tallas" src="https://placehold.co/600x600?text=Sube+tu+tabla+de+tallas+aqui" alt="Tabla de medidas" style="width: 100%; height: auto; border-radius: 4px;">
+        </div>
+    </div>
+
     <script>
         const URL_API = 'https://script.google.com/macros/s/AKfycbyZTODc4hs06UrN6XLkcwXm0AwKrTfpzHaPw1ky7HfHMcOYxPjTUr5qw_RiHoCbpBNabw/exec?action=getDatos';
         let allProducts = [];
@@ -582,10 +658,10 @@
             try {
                 const response = await fetch(URL_API, { method: 'GET', redirect: 'follow' });
                 if (!response.ok) throw new Error("Error HTTP");
-                
+
                 allProducts = await response.json();
                 document.getElementById('loader').style.display = 'none';
-                
+
                 populateSizeDropdown(allProducts);
                 handleURLRouting();
             } catch (err) {
@@ -598,7 +674,7 @@
             const select = document.getElementById('size-select');
             const uniqueSizes = [...new Set(products.map(p => p.talla ? p.talla.trim() : '').filter(t => t !== ''))];
             const sizeOrder = ['s', 'm', 'l', 'xl', 'xxl', '1xl', '2xl', '3xl', '4xl'];
-            
+
             uniqueSizes.sort((a, b) => {
                 let idxA = sizeOrder.indexOf(a.toLowerCase());
                 let idxB = sizeOrder.indexOf(b.toLowerCase());
@@ -607,7 +683,7 @@
                 if (idxB !== -1) return 1;
                 return a.localeCompare(b);
             });
-            
+
             let html = '<option value="">Filtrar por Talla</option>';
             html += '<option value="todos">Todas las tallas</option>';
             uniqueSizes.forEach(size => {
@@ -618,7 +694,7 @@
 
         function renderProducts(products) {
             const grid = document.getElementById('product-grid');
-            
+
             if (!products || products.length === 0) {
                 grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#777; font-size:12px; letter-spacing:1px;">No hay productos disponibles con estos filtros.</p>';
                 return;
@@ -645,7 +721,7 @@
 
         function applyFilter(type, value, element = null) {
             const urlParams = new URLSearchParams(window.location.search);
-            
+
             if (type === 'categoria') {
                 if (value === 'todos') {
                     urlParams.delete('categoria');
@@ -663,7 +739,7 @@
             const newQuery = urlParams.toString();
             const newUrl = newQuery ? `?${newQuery}` : window.location.pathname;
             window.history.pushState({}, '', newUrl);
-            
+
             filterAndRenderFromURL();
         }
 
@@ -672,8 +748,11 @@
             const categoria = urlParams.get('categoria');
             const talla = urlParams.get('talla');
 
-            // Actualizar visualmente la navegación de categorías
             document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+            document.getElementById('size-select').value = "";
+
+            let filtered = allProducts;
+
             if (categoria) {
                 const activeLink = document.querySelector(`.nav-link[data-category="${categoria}"]`);
                 if (activeLink) activeLink.classList.add('active');
@@ -682,11 +761,7 @@
                 if (defaultLink) defaultLink.classList.add('active');
             }
 
-            // Actualizar visualmente el selector de tallas
             document.getElementById('size-select').value = talla || "";
-
-            // Filtrar productos combinando ambas condiciones (Anidamiento)
-            let filtered = allProducts;
 
             if (categoria) {
                 if (categoria === 'nuevo') {
@@ -738,7 +813,7 @@
 
         function renderRecommendations(currentIndex, currentTalla) {
             const recGrid = document.getElementById('recommendations-grid');
-            
+
             const matchingProducts = allProducts
                 .map((p, idx) => ({ ...p, originalIndex: idx }))
                 .filter(p => p.originalIndex !== currentIndex && 
@@ -778,7 +853,7 @@
         function toggleAccordion(button) {
             const content = button.nextElementSibling;
             const icon = button.querySelector('.accordion-icon');
-            
+
             if (content.style.display === 'block') {
                 content.style.display = 'none';
                 icon.innerText = '+';
@@ -787,6 +862,19 @@
                 icon.innerText = '-';
             }
         }
+
+        // --- FUNCIONES NUEVAS PARA EL MODAL DE LA GUÍA DE TALLAS ---
+        function openSizeGuide() {
+            document.getElementById('modal-guia').style.display = 'flex';
+        }
+
+        function closeSizeGuide(event) {
+            // Verifica si el clic fue en la 'X' o fuera de la caja blanca para cerrarlo
+            if (event.target.classList.contains('modal-overlay') || event.target.classList.contains('close-modal')) {
+                document.getElementById('modal-guia').style.display = 'none';
+            }
+        }
+        // -----------------------------------------------------------
 
         initCatalog();
     </script>
