@@ -2,11 +2,12 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <!-- IMPORTANDO LA FUENTE NUNITO DESDE GOOGLE FONTS -->
+    
+    <!-- IMPORTACIÓN DE LA TIPOGRAFÍA NUNITO DESDE GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
+
     <style>
         :root {
             --bg-color: #ffffff;
@@ -15,13 +16,13 @@
             --border-color: #e5e5e5;
             --badge-bg: #111111;
             --accordion-bg: #f4f4f4;
-            --oferta-color: #e60000; /* Nuevo color rojo para las ofertas */
+            --oferta-color: #e60000;
         }
 
+        /* SE APLICA LA TIPOGRAFÍA NUNITO COMO PRINCIPAL */
         body { 
-            /* SE APLICA LA FUENTE NUNITO A TODO EL SITIO */
             font-family: 'Nunito', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-            font-weight: 700; /* Negrita por defecto */
+            font-weight: 700;
             margin: 0; 
             padding: 0; 
             background: var(--bg-color); 
@@ -36,7 +37,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             padding: 8px 10px;
-            font-weight: 800; /* Extra negrita para destacar arriba */
+            font-weight: 800;
         }
 
         .store-header {
@@ -131,6 +132,43 @@
             background: #fff;
         }
 
+        /* --- NUEVOS ESTILOS PARA LOS BOTONES DE TEMPORADA --- */
+        .temporadas-wrap {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            width: 100%;
+            margin-bottom: 5px;
+        }
+
+        .btn-temporada {
+            background-color: var(--oferta-color); /* Color rojo llamativo */
+            color: #fff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-family: inherit;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(230, 0, 0, 0.3);
+        }
+
+        .btn-temporada:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+        }
+
+        .btn-temporada.active {
+            background-color: var(--text-primary); /* Se vuelve negro si está seleccionado */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        /* --------------------------------------------------- */
+
         .store-nav {
             display: flex;
             justify-content: center;
@@ -140,7 +178,7 @@
         .nav-link {
             text-decoration: none;
             color: var(--text-secondary);
-            font-size: 12px;
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             cursor: pointer;
@@ -166,7 +204,7 @@
             border: 1px solid var(--border-color);
             padding: 10px 32px 10px 20px;
             border-radius: 30px;
-            font-size: 12px;
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--text-primary);
@@ -228,7 +266,7 @@
             left: 10px;
             background: var(--badge-bg);
             color: #fff;
-            font-size: 9px;
+            font-size: 10px;
             padding: 4px 8px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
@@ -263,7 +301,7 @@
             display: inline-block;
             background: #111;
             color: #fff;
-            font-size: 9px;
+            font-size: 10px;
             text-transform: uppercase;
             padding: 3px 8px;
             border-radius: 3px;
@@ -274,7 +312,7 @@
         }
 
         .product-modelo { 
-            font-size: 14px; 
+            font-size: 16px; 
             margin: 0 0 4px; 
             text-transform: uppercase; 
             letter-spacing: 1px;
@@ -282,7 +320,6 @@
             font-weight: 800;
         }
 
-        /* --- CLASES DE PRECIO PARA OFERTAS --- */
         .price-container {
             display: flex;
             gap: 8px;
@@ -290,7 +327,7 @@
         }
         
         .product-precio { 
-            font-size: 14px; 
+            font-size: 16px; 
             color: var(--text-secondary); 
             font-weight: 800; 
         }
@@ -303,7 +340,7 @@
         }
 
         .precio-oferta {
-            font-size: 16px;
+            font-size: 18px;
             color: var(--oferta-color);
             font-weight: 800;
         }
@@ -315,7 +352,7 @@
         }
 
         .detail-price {
-            font-size: 22px;
+            font-size: 20px;
             color: var(--text-secondary);
             font-weight: 800;
         }
@@ -328,11 +365,10 @@
         }
 
         .detail-precio-oferta {
-            font-size: 24px;
+            font-size: 22px;
             color: var(--oferta-color);
             font-weight: 800;
         }
-        /* ------------------------------------------ */
 
         .product-detail-container {
             display: none;
@@ -344,7 +380,7 @@
         .back-btn {
             background: none;
             border: none;
-            font-size: 12px;
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             cursor: pointer;
@@ -389,7 +425,7 @@
         }
 
         .detail-title {
-            font-size: 26px;
+            font-size: 24px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             margin: 0;
@@ -397,7 +433,7 @@
         }
 
         .detail-section-title {
-            font-size: 11px;
+            font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             color: var(--text-secondary);
@@ -413,14 +449,14 @@
 
         .talla-badge {
             display: inline-block;
-            border: 1px solid var(--text-primary);
+            border: 2px solid var(--text-primary);
             padding: 8px 16px;
-            font-size: 12px;
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 1px;
             background: #111;
             color: #fff;
-            border-radius: 4px;
+            border-radius: 6px;
             font-weight: 800;
         }
 
@@ -455,7 +491,7 @@
         .modal-content {
             background: #fff;
             padding: 30px 20px 20px;
-            border-radius: 8px;
+            border-radius: 12px;
             max-width: 500px;
             width: 90%;
             position: relative;
@@ -490,7 +526,7 @@
         .accordion-item {
             background: var(--accordion-bg);
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             overflow: hidden;
         }
 
@@ -500,14 +536,14 @@
             border: none;
             padding: 14px 16px;
             text-align: left;
-            font-size: 15px;
+            font-size: 14px;
             color: var(--text-primary);
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-family: inherit;
-            font-weight: 800;
+            font-weight: 700;
         }
 
         .accordion-header:hover {
@@ -515,14 +551,14 @@
         }
 
         .accordion-icon {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 800;
         }
 
         .accordion-content {
             display: none;
             padding: 0 16px 16px 16px;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-secondary);
             line-height: 1.6;
             font-weight: 600;
@@ -541,7 +577,7 @@
             text-align: center;
             text-decoration: none;
             margin-top: 5px;
-            border-radius: 4px;
+            border-radius: 6px;
             font-family: inherit;
             font-weight: 800;
         }
@@ -555,7 +591,7 @@
 
         .recommendations-title {
             text-align: center;
-            font-size: 14px;
+            font-size: 15px;
             text-transform: uppercase;
             letter-spacing: 2.5px;
             margin-bottom: 30px;
@@ -609,6 +645,12 @@
 
     <div id="catalog-view">
         <div class="filters-wrapper">
+            
+            <!-- CONTENEDOR DE BOTONES DINÁMICOS DE TEMPORADA -->
+            <div id="temporadas-container" class="temporadas-wrap" style="display: none;">
+                <!-- Los botones se insertarán aquí automáticamente por JS -->
+            </div>
+
             <nav class="store-nav" id="category-nav">
                 <a class="nav-link" data-category="todos" onclick="applyFilter('categoria', 'todos', this)">Ver todo</a>
                 <a class="nav-link" data-category="short" onclick="applyFilter('categoria', 'short', this)">Shorts</a>
@@ -637,7 +679,6 @@
             <div class="detail-info">
                 <h2 class="detail-title" id="detail-title"></h2>
                 
-                <!-- CONTENEDOR DE PRECIO EN EL DETALLE -->
                 <div class="detail-price-container" id="detail-price-wrapper">
                     <!-- Se llenará dinámicamente con JS -->
                 </div>
@@ -727,12 +768,41 @@
                 document.getElementById('loader').style.display = 'none';
 
                 populateSizeDropdown(allProducts);
+                populateTemporadas(allProducts); // Llenar botones dinámicos de temporada
                 handleURLRouting();
             } catch (err) {
                 document.getElementById('loader').innerText = "No se pudo conectar con el catálogo.";
                 console.error(err);
             }
         }
+
+        // --- FUNCION PARA CREAR BOTONES DE TEMPORADA AUTOMÁTICAMENTE ---
+        function populateTemporadas(products) {
+            const container = document.getElementById('temporadas-container');
+            
+            // Extraer todas las temporadas, limpiar espacios, eliminar vacías y evitar duplicados
+            const uniqueTemporadas = [...new Set(
+                products
+                    .map(p => p.temporada ? p.temporada.trim() : '')
+                    .filter(t => t !== '')
+            )];
+
+            // Si no hay ninguna temporada en ningún producto, ocultar contenedor y salir
+            if (uniqueTemporadas.length === 0) {
+                container.style.display = 'none';
+                return;
+            }
+
+            // Si hay temporadas, mostrar el contenedor y crear los botones
+            container.style.display = 'flex';
+            let html = '';
+            uniqueTemporadas.forEach(temp => {
+                // Creamos un botón para cada temporada encontrada
+                html += `<button class="btn-temporada" data-temporada="${temp.toLowerCase()}" onclick="applyFilter('temporada', '${temp.toLowerCase()}')">✨ Colección ${temp}</button>`;
+            });
+            container.innerHTML = html;
+        }
+        // -------------------------------------------------------------
 
         function populateSizeDropdown(products) {
             const select = document.getElementById('size-select');
@@ -756,7 +826,6 @@
             select.innerHTML = html;
         }
 
-        // --- FUNCION AUXILIAR PARA RENDERIZAR EL PRECIO CON OFERTA ---
         function getPriceHTML(precioOriginal, precioOferta, isDetail = false) {
             const numOriginal = Number(precioOriginal || 0);
             
@@ -784,7 +853,7 @@
             const grid = document.getElementById('product-grid');
 
             if (!products || products.length === 0) {
-                grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#777; font-size:14px; letter-spacing:1px; font-weight:600;">No hay productos disponibles con estos filtros.</p>';
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#777; font-size:13px; letter-spacing:1px; font-weight:600;">No hay productos disponibles con estos filtros.</p>';
                 return;
             }
 
@@ -813,6 +882,7 @@
             if (type === 'categoria') {
                 if (value === 'todos') {
                     urlParams.delete('categoria');
+                    urlParams.delete('temporada'); // Si le da a "Ver todo" borramos también el filtro de temporada
                 } else {
                     urlParams.set('categoria', value);
                 }
@@ -821,6 +891,13 @@
                     urlParams.delete('talla');
                 } else {
                     urlParams.set('talla', value);
+                }
+            } else if (type === 'temporada') {
+                // Lógica de toggle: si le dan clic a la temporada que ya está activa, se desactiva
+                if (value === urlParams.get('temporada')) {
+                    urlParams.delete('temporada');
+                } else {
+                    urlParams.set('temporada', value);
                 }
             }
 
@@ -835,12 +912,16 @@
             const urlParams = new URLSearchParams(window.location.search);
             const categoria = urlParams.get('categoria');
             const talla = urlParams.get('talla');
+            const temporada = urlParams.get('temporada');
 
+            // 1. Resetear estados visuales (quitar clase 'active' a todos los enlaces y botones)
             document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.btn-temporada').forEach(btn => btn.classList.remove('active'));
             document.getElementById('size-select').value = "";
 
             let filtered = allProducts;
 
+            // 2. Marcar visualmente la categoría activa (o "todos" por defecto)
             if (categoria) {
                 const activeLink = document.querySelector(`.nav-link[data-category="${categoria}"]`);
                 if (activeLink) activeLink.classList.add('active');
@@ -849,8 +930,16 @@
                 if (defaultLink) defaultLink.classList.add('active');
             }
 
+            // 3. Marcar visualmente el botón de temporada activo
+            if (temporada) {
+                const activeBtn = document.querySelector(`.btn-temporada[data-temporada="${temporada}"]`);
+                if (activeBtn) activeBtn.classList.add('active');
+            }
+
+            // 4. Seleccionar talla en el dropdown
             document.getElementById('size-select').value = talla || "";
 
+            // 5. Aplicar Filtro de Categoría
             if (categoria) {
                 if (categoria === 'nuevo') {
                     filtered = filtered.filter(p => p.esNuevo === true);
@@ -859,8 +948,14 @@
                 }
             }
 
+            // 6. Aplicar Filtro de Talla
             if (talla) {
                 filtered = filtered.filter(p => p.talla && p.talla.trim().toLowerCase() === talla.toLowerCase());
+            }
+
+            // 7. Aplicar Filtro de Temporada
+            if (temporada) {
+                filtered = filtered.filter(p => p.temporada && p.temporada.trim().toLowerCase() === temporada.toLowerCase());
             }
 
             document.getElementById('detail-view').style.display = 'none';
@@ -883,7 +978,6 @@
             document.getElementById('detail-img').src = p.foto;
             document.getElementById('detail-title').innerText = p.modelo || 'Pijama HILACHA';
             
-            // Renderizamos el precio en el detalle
             document.getElementById('detail-price-wrapper').innerHTML = getPriceHTML(p.precio, p.precioOferta, true);
             
             document.getElementById('detail-talla').innerText = p.talla || 'Única';
@@ -892,7 +986,6 @@
                 ? p.descripcion 
                 : 'Conjunto de pijama diseñado con alta comodidad, suavidad y estilo exclusivo de HILACHA.';
 
-            // Actualizamos el mensaje de WhatsApp para que mande el precio de oferta si existe
             let precioMostrar = p.precioOferta && p.precioOferta.trim() !== '' ? p.precioOferta : p.precio;
             const mensajeWp = encodeURIComponent(`Hola, me interesa la pijama *${p.modelo}* (${p.talla || 'Talla única'}) de S/. ${Number(precioMostrar).toLocaleString()}. ¿Está disponible?`);
             document.getElementById('detail-whatsapp').href = `https://wa.me/51924789997?text=${mensajeWp}`;
@@ -917,7 +1010,7 @@
             const shuffled = matchingProducts.sort(() => 0.5 - Math.random()).slice(0, 4);
 
             if (shuffled.length === 0) {
-                recGrid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#777; font-size:14px; font-weight:600;">No hay más productos disponibles en esta misma talla.</p>';
+                recGrid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#777; font-size:13px; font-weight:600;">No hay más productos disponibles en esta misma talla.</p>';
                 return;
             }
 
@@ -969,4 +1062,3 @@
         initCatalog();
     </script>
 </body>
-</html>
