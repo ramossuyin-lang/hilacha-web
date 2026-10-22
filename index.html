@@ -2,6 +2,17 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HILACHA - Pijamas comodas y modernas</title>
+    <meta name="description" content="Pijamas comodas y modernas en todas las tallas (S a 4XL). Pedidos por WhatsApp con envios a todo el Peru.">
+    <!-- Open Graph: genera el preview con imagen en WhatsApp y redes -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="HILACHA">
+    <meta property="og:title" content="HILACHA - Pijamas comodas y modernas">
+    <meta property="og:description" content="Pijamas comodas y modernas en todas las tallas (S a 4XL). Pedidos por WhatsApp con envios a todo el Peru.">
+    <meta property="og:url" content="https://hilacha-web.vercel.app/">
+    <meta property="og:image" content="https://i.postimg.cc/B6VcjcNR/1767752107263-removebg-preview.png">
+    <meta name="twitter:card" content="summary_large_image">
     
     <!-- IMPORTACIÓN DE LA TIPOGRAFÍA NUNITO DESDE GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -170,6 +181,48 @@
         .footer-socials a:hover { opacity: 0.6; }
         .footer-socials svg { width: 22px; height: 22px; }
 
+        /* ===== CARRITO (boton flotante + panel) ===== */
+        #cart-fab { position: fixed; bottom: 22px; right: 22px; z-index: 9000; width: 60px; height: 60px; border-radius: 50%; background: #111; color: #fff; border: none; font-size: 24px; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.3); display: flex; align-items: center; justify-content: center; }
+        #cart-count { position: absolute; top: -4px; right: -4px; background: var(--oferta-color); color: #fff; font-size: 12px; font-weight: 800; min-width: 22px; height: 22px; border-radius: 11px; display: flex; align-items: center; justify-content: center; padding: 0 5px; }
+        .cart-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,.55); z-index: 9500; }
+        .cart-panel { position: absolute; top: 0; right: 0; width: 380px; max-width: 92vw; height: 100%; background: #fff; display: flex; flex-direction: column; box-shadow: -4px 0 16px rgba(0,0,0,.2); }
+        .cart-head { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border-bottom: 1px solid var(--border-color); }
+        .cart-head h3 { margin: 0; font-size: 16px; text-transform: uppercase; letter-spacing: 2px; }
+        .cart-head .close-modal { position: static; }
+        #cart-items { flex: 1; overflow-y: auto; padding: 15px 20px; }
+        .cart-empty { text-align: center; color: var(--text-secondary); font-size: 14px; line-height: 1.8; margin-top: 40px; }
+        .cart-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border-color); align-items: center; }
+        .cart-item img { width: 56px; height: 72px; object-fit: cover; border-radius: 6px; background: #f4f4f4; }
+        .cart-item-info { flex: 1; }
+        .cart-item-name { font-size: 13px; text-transform: uppercase; letter-spacing: .5px; }
+        .cart-item-meta { font-size: 12px; color: var(--text-secondary); margin: 4px 0; }
+        .cart-qty { display: inline-flex; align-items: center; gap: 10px; }
+        .cart-qty button { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--border-color); background: #fff; font-size: 15px; cursor: pointer; line-height: 1; }
+        .cart-qty span { font-size: 14px; min-width: 18px; text-align: center; }
+        .cart-del { background: none; border: none; color: #999; font-size: 16px; cursor: pointer; }
+        .cart-foot { padding: 18px 20px; border-top: 1px solid var(--border-color); }
+        .cart-total { font-size: 16px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .cart-cta { width: 100%; box-sizing: border-box; display: block; }
+        .btn-vaciar { width: 100%; background: none; border: none; color: var(--text-secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 10px; cursor: pointer; text-decoration: underline; font-family: inherit; }
+
+        /* ===== BOTONES AGREGAR / COMPARTIR EN TARJETA ===== */
+        .card-actions { display: flex; gap: 8px; margin-top: 10px; }
+        .btn-add-cart { flex: 1; background: #111; color: #fff; border: none; padding: 10px; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; border-radius: 6px; cursor: pointer; font-family: inherit; font-weight: 800; }
+        .btn-add-cart:hover { opacity: .85; }
+        .btn-share-card { width: 42px; background: #f4f4f4; border: 1px solid var(--border-color); border-radius: 6px; font-size: 17px; cursor: pointer; }
+        .btn-share-card:hover { background: #e9e9e9; }
+
+        /* ===== DETALLE: FILA DE BOTONES ===== */
+        .detail-actions-row { display: flex; gap: 10px; margin-top: 5px; }
+        .detail-actions-row .buy-button { flex: 1; margin-top: 0; }
+        .btn-sec { background: #fff !important; color: #111 !important; border: 2px solid #111 !important; }
+
+        /* ===== MODAL COMPARTIR ===== */
+        .share-btns { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+        .share-btn { background: #111; color: #fff; border: none; padding: 13px; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; border-radius: 6px; cursor: pointer; font-family: inherit; font-weight: 800; }
+        .share-btn:hover { opacity: .85; }
+        .share-hint { font-size: 12px; color: var(--text-secondary); margin: 0; }
+
     </style>
 </head>
 <body>
@@ -267,6 +320,10 @@
                     </div>
                 </div>
                 <a id="detail-whatsapp" href="#" target="_blank" class="buy-button">Comprar por WhatsApp</a>
+                <div class="detail-actions-row">
+                    <button class="buy-button btn-sec" onclick="addToCartByIndex(currentDetailIndex)">Agregar al carrito</button>
+                    <button class="buy-button btn-sec" onclick="shareProduct(currentDetailIndex)">Compartir</button>
+                </div>
             </div>
         </div>
         <div class="recommendations-section">
@@ -379,12 +436,41 @@
                 
                 <div class="footer-socials">
                     <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-                    <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 15.66a6.33 6.33 0 0 0 6.33 6.33 6.33 6.33 0 0 0 6.33-6.33v-8.5a8.28 8.28 0 0 0 4.1 1.15V4.86a5.28 5.28 0 0 1-2.17.43Z"/></svg></a>
+                    <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
                     <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- CARRITO -->
+    <button id="cart-fab" onclick="toggleCart(true)" aria-label="Ver carrito">&#128722;<span id="cart-count">0</span></button>
+    <div id="cart-overlay" class="cart-overlay" onclick="toggleCart(false)">
+        <div class="cart-panel" onclick="event.stopPropagation()">
+            <div class="cart-head"><h3>Tu carrito</h3><span class="close-modal" onclick="toggleCart(false)">&times;</span></div>
+            <div id="cart-items"></div>
+            <div class="cart-foot">
+                <div class="cart-total">Total: <b id="cart-total">S/. 0</b></div>
+                <button class="buy-button cart-cta" onclick="sendCartWhatsApp()">Pedir por WhatsApp</button>
+                <button class="btn-vaciar" onclick="clearCart()">Vaciar carrito</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL COMPARTIR -->
+    <div id="modal-share" class="modal-overlay" onclick="if(event.target===this)this.style.display='none'">
+        <div class="modal-content">
+            <span class="close-modal" onclick="document.getElementById('modal-share').style.display='none'">&times;</span>
+            <h3 class="modal-title">Compartir</h3>
+            <div class="share-btns">
+                <button class="share-btn" onclick="shareVia('wa')">WhatsApp</button>
+                <button class="share-btn" id="share-messenger" onclick="shareVia('ms')">Messenger</button>
+                <button class="share-btn" onclick="shareVia('fb')">Facebook</button>
+                <button class="share-btn" onclick="shareVia('copy')">Copiar enlace</button>
+            </div>
+            <p class="share-hint">Para Instagram: usa "Copiar enlace" y pegalo en tu historia o mensaje.</p>
+        </div>
+    </div>
 
     <!-- MODAL GUIA DE TALLAS -->
     <div id="modal-guia" class="modal-overlay" onclick="closeSizeGuide(event)">
@@ -495,6 +581,7 @@
                         <div class="product-size-tag">${p.talla || 'Única'}</div>
                         <div class="product-modelo">${p.modelo || 'Pijama HILACHA'}</div>
                         ${getPriceHTML(p.precio, p.precioOferta, false)}
+                        ${cardActions(realIndex !== -1 ? realIndex : index)}
                     </div>
                 `;
             }).join('');
@@ -502,6 +589,7 @@
 
         function applyFilter(type, value, element = null) {
             const urlParams = new URLSearchParams(window.location.search);
+            urlParams.delete('producto');
             if (type === 'categoria') {
                 if (value === 'todos') { urlParams.delete('categoria'); urlParams.delete('temporada'); }
                 else urlParams.set('categoria', value);
@@ -557,7 +645,11 @@
             renderProducts(filtered);
         }
 
-        function handleURLRouting() { filterAndRenderFromURL(); }
+        function handleURLRouting() {
+            filterAndRenderFromURL();
+            const idx = parseInt(new URLSearchParams(window.location.search).get('producto'), 10);
+            if (!isNaN(idx) && allProducts[idx]) openProduct(idx);
+        }
         window.addEventListener('popstate', () => { filterAndRenderFromURL(); });
 
         function openProduct(index) {
@@ -581,6 +673,8 @@
             document.getElementById('contact-view').style.display = 'none';
             document.getElementById('about-view').style.display = 'none';
             document.getElementById('detail-view').style.display = 'block';
+            currentDetailIndex = index;
+            window.history.pushState({}, '', '?producto=' + index);
             window.scrollTo(0, 0);
         }
 
@@ -600,6 +694,7 @@
                     <div class="product-size-tag">${p.talla || 'Única'}</div>
                     <div class="product-modelo">${p.modelo || 'Pijama HILACHA'}</div>
                     ${getPriceHTML(p.precio, p.precioOferta, false)}
+                ${cardActions(p.originalIndex)}
                 </div>
             `).join('');
         }
@@ -653,6 +748,140 @@
         function openSizeGuide() { document.getElementById('modal-guia').style.display = 'flex'; }
         function closeSizeGuide(event) { if (event.target.classList.contains('modal-overlay') || event.target.classList.contains('close-modal')) { document.getElementById('modal-guia').style.display = 'none'; } }
 
+        /* ===HILACHA-CARRITO-START=== */
+        let currentDetailIndex = -1;
+        const CART_KEY = 'hilacha_cart_v1';
+        const WA_NUMBER = '51924789997';
+        const SITE_URL = 'https://hilacha-web.vercel.app/';
+        const NL = String.fromCharCode(10);
+
+        function getCart() {
+            try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+            catch (e) { return []; }
+        }
+        function saveCart(c) { localStorage.setItem(CART_KEY, JSON.stringify(c)); updateCartBadge(); }
+        function updateCartBadge() {
+            const n = getCart().reduce(function (a, it) { return a + it.qty; }, 0);
+            const b = document.getElementById('cart-count');
+            if (b) b.innerText = n;
+        }
+        function snapProduct(p) {
+            const oferta = p.precioOferta && String(p.precioOferta).trim() !== '';
+            return {
+                modelo: p.modelo || 'Pijama HILACHA',
+                talla: p.talla || 'Unica',
+                precio: Number(oferta ? p.precioOferta : p.precio) || 0,
+                foto: p.foto || ''
+            };
+        }
+        function addToCartByIndex(i) {
+            const p = allProducts[i];
+            if (!p) return;
+            const s = snapProduct(p);
+            const cart = getCart();
+            const found = cart.find(function (it) { return it.modelo === s.modelo && it.talla === s.talla; });
+            if (found) { found.qty += 1; }
+            else { cart.push({ modelo: s.modelo, talla: s.talla, precio: s.precio, foto: s.foto, qty: 1 }); }
+            saveCart(cart);
+            renderCart();
+            toggleCart(true);
+        }
+        function cartChangeQty(k, d) {
+            const cart = getCart();
+            if (!cart[k]) return;
+            cart[k].qty += d;
+            if (cart[k].qty <= 0) cart.splice(k, 1);
+            saveCart(cart); renderCart();
+        }
+        function cartRemove(k) { const cart = getCart(); cart.splice(k, 1); saveCart(cart); renderCart(); }
+        function clearCart() { saveCart([]); renderCart(); }
+        function cartTotal() { return getCart().reduce(function (a, it) { return a + it.precio * it.qty; }, 0); }
+        function renderCart() {
+            const box = document.getElementById('cart-items');
+            const cart = getCart();
+            if (!cart.length) {
+                box.innerHTML = '<p class="cart-empty">Tu carrito esta vacio.<br>Agrega pijamas con el boton "Agregar".</p>';
+            } else {
+                const rows = cart.map(function (it, k) {
+                    const img = it.foto ? '<img src="' + it.foto + '" alt="">' : '';
+                    return '<div class="cart-item">' + img +
+                        '<div class="cart-item-info">' +
+                        '<div class="cart-item-name">' + it.modelo + '</div>' +
+                        '<div class="cart-item-meta">Talla ' + it.talla + ' - S/. ' + it.precio.toLocaleString() + '</div>' +
+                        '<div class="cart-qty"><button onclick="cartChangeQty(' + k + ',-1)">-</button>' +
+                        '<span>' + it.qty + '</span>' +
+                        '<button onclick="cartChangeQty(' + k + ',1)">+</button></div>' +
+                        '</div><button class="cart-del" onclick="cartRemove(' + k + ')">x</button></div>';
+                });
+                box.innerHTML = rows.join('');
+            }
+            document.getElementById('cart-total').innerText = 'S/. ' + cartTotal().toLocaleString();
+        }
+        function toggleCart(open) {
+            document.getElementById('cart-overlay').style.display = open ? 'block' : 'none';
+            if (open) renderCart();
+            document.body.style.overflow = open ? 'hidden' : '';
+        }
+        function sendCartWhatsApp() {
+            const cart = getCart();
+            if (!cart.length) return;
+            const lines = cart.map(function (it, k) {
+                return (k + 1) + '. *' + it.modelo + '* (' + it.talla + ') x' + it.qty + ' - S/. ' + (it.precio * it.qty).toLocaleString();
+            });
+            const msg = ['Hola HILACHA, quiero hacer este pedido:', ''].concat(lines).concat(['', '*Total: S/. ' + cartTotal().toLocaleString() + '*']).join(NL);
+            window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
+        }
+
+        /* ===HILACHA-SHARE-START=== */
+        let shareIdx = -1;
+        function productURL(i) { return SITE_URL + '?producto=' + i; }
+        function shareText(i) {
+            const p = allProducts[i]; if (!p) return 'HILACHA';
+            const pr = p.precioOferta && String(p.precioOferta).trim() !== '' ? p.precioOferta : p.precio;
+            return 'Mira esta pijama ' + (p.modelo || 'HILACHA') + ' (' + (p.talla || 'Unica') + ') a S/. ' + Number(pr).toLocaleString() + ' en HILACHA';
+        }
+        function cardActions(i) {
+            return '<div class="card-actions">' +
+                '<button class="btn-add-cart" onclick="event.stopPropagation();addToCartByIndex(' + i + ')">Agregar</button>' +
+                '<button class="btn-share-card" onclick="event.stopPropagation();shareProduct(' + i + ')" aria-label="Compartir">&#8599;</button></div>';
+        }
+        function isMobile() { return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent); }
+        function shareProduct(i) {
+            if (!allProducts[i]) return;
+            const data = { title: 'HILACHA', text: shareText(i), url: productURL(i) };
+            if (navigator.share) { navigator.share(data).catch(function () {}); return; }
+            shareIdx = i;
+            document.getElementById('share-messenger').style.display = isMobile() ? 'block' : 'none';
+            document.getElementById('modal-share').style.display = 'flex';
+        }
+        function shareVia(where) {
+            const url = productURL(shareIdx);
+            const txt = shareText(shareIdx);
+            if (where === 'wa') { window.open('https://wa.me/?text=' + encodeURIComponent(txt + ' ' + url), '_blank'); }
+            else if (where === 'fb') { window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), '_blank'); }
+            else if (where === 'ms') { window.location.href = 'fb-messenger://share?link=' + encodeURIComponent(url); }
+            else if (where === 'copy') { copyText(url, 'Enlace copiado. Pegalo donde quieras (Instagram, DM, etc.)'); }
+            document.getElementById('modal-share').style.display = 'none';
+        }
+        function copyText(t, okMsg) {
+            const done = function () { alert(okMsg || 'Copiado'); };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(t).then(done).catch(function () { fallbackCopy(t, done); });
+            } else { fallbackCopy(t, done); }
+        }
+        function fallbackCopy(t, done) {
+            const ta = document.createElement('textarea');
+            ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); done(); } catch (e) {}
+            document.body.removeChild(ta);
+        }
+        /* ===HILACHA-CARRITO-END=== */
+
+        // NOTA SEGURIDAD: esta pagina solo usa la accion publica de lectura (action=getDatos).
+        // No exponer aqui acciones de escritura del Apps Script; la validacion debe vivir en el servidor (.gs).
+
+        updateCartBadge();
         initCatalog();
     </script>
 </body>
