@@ -834,7 +834,7 @@
 
         /* ===HILACHA-SHARE-START=== */
         let shareIdx = -1;
-        function productURL(i) { return SITE_URL + '?producto=' + i; }
+        function productURL(i) { return SITE_URL + '/api/producto?i=' + i; }
         function shareText(i) {
             const p = allProducts[i]; if (!p) return 'HILACHA';
             const pr = p.precioOferta && String(p.precioOferta).trim() !== '' ? p.precioOferta : p.precio;
