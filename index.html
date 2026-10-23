@@ -223,6 +223,25 @@
         .share-btn:hover { opacity: .85; }
         .share-hint { font-size: 12px; color: var(--text-secondary); margin: 0; }
 
+        /* ===== MODALES LEGALES ===== */
+        .modal-legal .modal-content { max-width: 640px; text-align: left; max-height: 85vh; overflow-y: auto; padding: 0; }
+        .legal-header { background: #111; color: #fff; padding: 32px 25px; border-radius: 12px 12px 0 0; text-align: center; }
+        .legal-emoji { font-size: 42px; }
+        .legal-header h3 { margin: 10px 0 0; font-size: 18px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; }
+        .legal-body { padding: 25px; font-size: 13.5px; color: var(--text-secondary); line-height: 1.7; font-weight: 600; }
+        .legal-body h4 { color: var(--text-primary); font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin: 22px 0 8px; font-weight: 800; }
+        .legal-body h4:first-child { margin-top: 0; }
+        .legal-body p { margin: 0 0 10px; }
+        .legal-body ul { margin: 0 0 10px 18px; padding: 0; }
+        .legal-body li { margin-bottom: 6px; }
+        .legal-nota { background: #f4f4f4; border-radius: 8px; padding: 14px 16px; font-size: 12.5px; margin-bottom: 18px; }
+
+        /* ===== SOCIAL EN HEADER ===== */
+        .header-socials { display: flex; justify-content: center; gap: 18px; padding: 6px 0 14px; }
+        .header-socials a { color: var(--text-primary); display: inline-flex; transition: opacity 0.2s; }
+        .header-socials a:hover { opacity: 0.6; }
+        .header-socials svg { width: 20px; height: 20px; }
+
     </style>
 </head>
 <body>
@@ -231,6 +250,11 @@
 
     <header class="store-header" onclick="showCatalog()">
         <img src="https://i.postimg.cc/B6VcjcNR/1767752107263-removebg-preview.png" alt="HILACHA" class="store-logo-img" onerror="this.outerHTML='<h1 style=\'font-size:26px;font-weight:800;text-transform:uppercase;letter-spacing:4px;margin:0;\'>HILACHA</h1>'">
+        <div class="header-socials">
+            <a href="https://www.facebook.com/people/hilacharp/61593280591187/" target="_blank" aria-label="Facebook" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+            <a href="https://www.tiktok.com/@hilacha.rp" target="_blank" aria-label="TikTok" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 15.66a6.33 6.33 0 0 0 6.33 6.33 6.33 6.33 0 0 0 6.33-6.33v-8.5a8.28 8.28 0 0 0 4.1 1.15V4.86a5.28 5.28 0 0 1-2.17.43Z"/></svg></a>
+            <a href="https://www.instagram.com/hilacharp?rpxt=cDQzNmRueHRmMmdt" target="_blank" aria-label="Instagram" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+        </div>
     </header>
 
     <!-- ESTE CONTENEDOR ES LA VISTA PRINCIPAL (CATÁLOGO) -->
@@ -423,9 +447,9 @@
             <div class="footer-col">
                 <h4>La Empresa</h4>
                 <ul class="footer-nav">
-                    <li><a href="#">Términos y Condiciones</a></li>
-                    <li><a href="#">Políticas de Privacidad</a></li>
-                    <li><a href="#">Libro de Reclamaciones</a></li>
+                    <li><a href="#" onclick="openLegal('modal-terminos'); return false;">Términos y Condiciones</a></li>
+                    <li><a href="#" onclick="openLegal('modal-privacidad'); return false;">Política de Privacidad</a></li>
+                    
                 </ul>
             </div>
 
@@ -435,9 +459,9 @@
                 <div class="footer-contact-bold">+51 924 789 997</div>
                 
                 <div class="footer-socials">
-                    <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-                    <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-                    <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="https://www.facebook.com/people/hilacharp/61593280591187/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                    <a href="https://www.tiktok.com/@hilacha.rp" target="_blank" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                    <a href="https://www.instagram.com/hilacharp?rpxt=cDQzNmRueHRmMmdt" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
                 </div>
             </div>
         </div>
@@ -469,6 +493,68 @@
                 <button class="share-btn" onclick="shareVia('copy')">Copiar enlace</button>
             </div>
             <p class="share-hint">Para Instagram: usa "Copiar enlace" y pegalo en tu historia o mensaje.</p>
+        </div>
+    </div>
+
+    <!-- MODAL: TERMINOS Y CONDICIONES -->
+    <div id="modal-terminos" class="modal-overlay modal-legal" onclick="closeLegal(event, 'modal-terminos')">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeLegal(event, 'modal-terminos')">&times;</span>
+            <div class="legal-header"><div class="legal-emoji">📋</div><h3>Términos y Condiciones</h3></div>
+            <div class="legal-body">
+                <h4>1. Identificación</h4>
+                <p>HILACHA · WhatsApp +51 924 789 997 · contacto@hilacha.pe · Atención: lunes a sábado de 9:00 a. m. a 6:00 p. m.</p>
+                <h4>2. Productos y precios</h4>
+                <ul>
+                    <li>Precios expresados en Soles (S/).</li>
+                    <li>Las fotografías son referenciales; el tono puede variar ligeramente según la pantalla.</li>
+                    <li>Stock sujeto a disponibilidad; se confirma al momento del pedido.</li>
+                </ul>
+                <h4>3. Pedidos</h4>
+                <p>Los pedidos se realizan por WhatsApp o con el carrito de la tienda y quedan confirmados con el pago correspondiente.</p>
+                <h4>4. Medios de pago</h4>
+                <p>Transferencia bancaria, Yape y Plin.</p>
+                <h4>5. Envíos</h4>
+                <ul>
+                    <li>Realizamos envíos seguros a todo el Perú.</li>
+                    <li>El costo y el tiempo de entrega dependen del destino.</li>
+                    <li>El despacho se realiza una vez confirmado el pago.</li>
+                </ul>
+                <h4>6. Cambios y devoluciones</h4>
+                <ul>
+                    <li>Cambios de talla dentro de los 7 días calendario de recibido el producto.</li>
+                    <li>La prenda debe estar sin uso, con etiquetas y en su empaque original.</li>
+                    <li>El costo del envío por cambio lo asume el cliente, salvo error nuestro.</li>
+                </ul>
+                <h4>7. Garantía</h4>
+                <p>30 días por defectos de confección. No cubre desgaste por uso ni mal lavado.</p>
+                <p style="margin-top:20px;color:#999;font-size:12px;">Última actualización: octubre 2026.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: POLITICA DE PRIVACIDAD -->
+    <div id="modal-privacidad" class="modal-overlay modal-legal" onclick="closeLegal(event, 'modal-privacidad')">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeLegal(event, 'modal-privacidad')">&times;</span>
+            <div class="legal-header"><div class="legal-emoji">🔒</div><h3>Política de Privacidad</h3></div>
+            <div class="legal-body">
+                <div class="legal-nota">En HILACHA tratamos tus datos personales conforme a la Ley N.° 29733, Ley de Protección de Datos Personales.</div>
+                <h4>1. Datos que recopilamos</h4>
+                <p>Nombres, teléfono, dirección de entrega y correo electrónico, únicamente los necesarios para procesar tu pedido.</p>
+                <h4>2. Finalidad</h4>
+                <ul>
+                    <li>Procesar y entregar tus pedidos.</li>
+                    <li>Atención al cliente y comunicaciones sobre tu compra.</li>
+                </ul>
+                <h4>3. Compartir datos</h4>
+                <p>No vendemos ni compartimos tus datos con terceros con fines publicitarios. Solo se comparten con la empresa de transporte para la entrega.</p>
+                <h4>4. Tus derechos (ARCO)</h4>
+                <p>Puedes ejercer tus derechos de acceso, rectificación, cancelación y oposición escribiendo a contacto@hilacha.pe.</p>
+                <h4>5. Seguridad</h4>
+                <p>Aplicamos medidas razonables para proteger tu información contra accesos no autorizados.</p>
+                <p style="margin-top:20px;color:#999;font-size:12px;">Última actualización: octubre 2026.</p>
+            </div>
         </div>
     </div>
 
@@ -880,6 +966,20 @@
 
         // NOTA SEGURIDAD: esta pagina solo usa la accion publica de lectura (action=getDatos).
         // No exponer aqui acciones de escritura del Apps Script; la validacion debe vivir en el servidor (.gs).
+
+        /* ===HILACHA-LEGALES-START=== */
+        function openLegal(id) {
+            document.getElementById(id).style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLegal(event, id) {
+            const m = document.getElementById(id);
+            if (event.target === m || (event.target.classList && event.target.classList.contains('close-modal'))) {
+                m.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        }
+        /* ===HILACHA-LEGALES-END=== */
 
         updateCartBadge();
         initCatalog();
