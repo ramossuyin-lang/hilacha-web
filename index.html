@@ -11,7 +11,9 @@
     <meta property="og:title" content="HILACHA - Pijamas comodas y modernas">
     <meta property="og:description" content="Pijamas comodas y modernas en todas las tallas (S a 4XL). Pedidos por WhatsApp con envios a todo el Peru.">
     <meta property="og:url" content="https://hilacha-web.vercel.app/">
-    <meta property="og:image" content="https://i.postimg.cc/B6VcjcNR/1767752107263-removebg-preview.png">
+    <meta property="og:image" content="https://hilacha-web.vercel.app/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     
     <!-- IMPORTACIÓN DE LA TIPOGRAFÍA NUNITO DESDE GOOGLE FONTS -->
@@ -380,7 +382,7 @@
                 </div>
                 <div class="c-info-item">
                     <div class="c-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
-                    <div class="c-text"><h4>Atención</h4><p>Lunes a Sábado<br>8:00 AM - 11:59 PM</p></div>
+                    <div class="c-text"><h4>Atención</h4><p>Lunes a Sábado<br>9:00 AM - 6:00 PM</p></div>
                 </div>
             </div>
 
@@ -503,7 +505,7 @@
             <div class="legal-header"><div class="legal-emoji">📋</div><h3>Términos y Condiciones</h3></div>
             <div class="legal-body">
                 <h4>1. Identificación</h4>
-                <p>HILACHA · WhatsApp +51 924 789 997 · contacto@hilacha.pe · Atención: lunes a domingo de 8:00 a. m. a 11:59 p. m.</p>
+                <p>HILACHA · WhatsApp +51 924 789 997 · contacto@hilacha.pe · Atención: lunes a sábado de 9:00 a. m. a 6:00 p. m.</p>
                 <h4>2. Productos y precios</h4>
                 <ul>
                     <li>Precios expresados en Soles (S/).</li>
@@ -518,7 +520,16 @@
                 <ul>
                     <li>Realizamos envíos seguros a todo el Perú.</li>
                     <li>El costo y el tiempo de entrega dependen del destino.</li>
-                    </p>El despacho se realiza una vez confirmado el pago.</p>
+                    <li>El despacho se realiza una vez confirmado el pago.</li>
+                </ul>
+                <h4>6. Cambios y devoluciones</h4>
+                <ul>
+                    <li>Cambios de talla dentro de los 7 días calendario de recibido el producto.</li>
+                    <li>La prenda debe estar sin uso, con etiquetas y en su empaque original.</li>
+                    <li>El costo del envío por cambio lo asume el cliente, salvo error nuestro.</li>
+                </ul>
+                <h4>7. Garantía</h4>
+                <p>30 días por defectos de confección. No cubre desgaste por uso ni mal lavado.</p>
                 <p style="margin-top:20px;color:#999;font-size:12px;">Última actualización: octubre 2026.</p>
             </div>
         </div>
@@ -842,23 +853,34 @@
             const b = document.getElementById('cart-count');
             if (b) b.innerText = n;
         }
+        function stockOf(p) {
+            if (p.stock === undefined || p.stock === null || String(p.stock).trim() === '') return null;
+            const n = Number(p.stock);
+            return isNaN(n) ? null : n;
+        }
         function snapProduct(p) {
             const oferta = p.precioOferta && String(p.precioOferta).trim() !== '';
             return {
                 modelo: p.modelo || 'Pijama HILACHA',
                 talla: p.talla || 'Unica',
                 precio: Number(oferta ? p.precioOferta : p.precio) || 0,
-                foto: p.foto || ''
+                foto: p.foto || '',
+                stock: stockOf(p)
             };
         }
         function addToCartByIndex(i) {
             const p = allProducts[i];
             if (!p) return;
             const s = snapProduct(p);
+            s.url = productURL(i);
             const cart = getCart();
             const found = cart.find(function (it) { return it.modelo === s.modelo && it.talla === s.talla; });
-            if (found) { found.qty += 1; }
-            else { cart.push({ modelo: s.modelo, talla: s.talla, precio: s.precio, foto: s.foto, qty: 1 }); }
+            if (found) {
+                if (!found.url) found.url = s.url;
+                if (found.stock !== null && found.stock !== undefined && found.qty >= found.stock) { alert('Solo queda ' + found.stock + ' unidad(es) de esta pijama.'); renderCart(); toggleCart(true); return; }
+                found.qty += 1;
+            }
+            else { cart.push({ modelo: s.modelo, talla: s.talla, precio: s.precio, foto: s.foto, stock: s.stock, url: s.url, qty: 1 }); }
             saveCart(cart);
             renderCart();
             toggleCart(true);
@@ -866,6 +888,7 @@
         function cartChangeQty(k, d) {
             const cart = getCart();
             if (!cart[k]) return;
+            if (d > 0 && cart[k].stock !== null && cart[k].stock !== undefined && cart[k].qty >= cart[k].stock) return;
             cart[k].qty += d;
             if (cart[k].qty <= 0) cart.splice(k, 1);
             saveCart(cart); renderCart();
@@ -883,7 +906,7 @@
                     const img = it.foto ? '<img src="' + it.foto + '" alt="">' : '';
                     return '<div class="cart-item">' + img +
                         '<div class="cart-item-info">' +
-                        '<div class="cart-item-name">' + it.modelo + '</div>' +
+                        '<div class="cart-item-name">' + (it.url ? '<a href="' + it.url + '" target="_blank" rel="noopener">' + it.modelo + '</a>' : it.modelo) + '</div>' +
                         '<div class="cart-item-meta">Talla ' + it.talla + ' - S/. ' + it.precio.toLocaleString() + '</div>' +
                         '<div class="cart-qty"><button onclick="cartChangeQty(' + k + ',-1)">-</button>' +
                         '<span>' + it.qty + '</span>' +
@@ -903,7 +926,8 @@
             const cart = getCart();
             if (!cart.length) return;
             const lines = cart.map(function (it, k) {
-                return (k + 1) + '. *' + it.modelo + '* (' + it.talla + ') x' + it.qty + ' - S/. ' + (it.precio * it.qty).toLocaleString();
+                const head = (k + 1) + '. *' + it.modelo + '* (' + it.talla + ') x' + it.qty + ' - S/. ' + (it.precio * it.qty).toLocaleString();
+                return it.url ? head + NL + it.url : head;
             });
             const msg = ['Hola HILACHA, quiero hacer este pedido:', ''].concat(lines).concat(['', '*Total: S/. ' + cartTotal().toLocaleString() + '*']).join(NL);
             window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
