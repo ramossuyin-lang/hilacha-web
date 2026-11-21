@@ -15,7 +15,17 @@ function esc(s) {
     .replace(/"/g, '&quot;');
 }
 
+// Clave estable del producto: igual que en la tienda (id si el backend lo manda,
+// si no "fila-<n>" con la fila original de la hoja).
+function keyOf(p) {
+  if (!p) return null;
+  if (p.id !== undefined && p.id !== null && String(p.id).trim() !== '') return String(p.id);
+  if (p.filaOriginal !== undefined && p.filaOriginal !== null && String(p.filaOriginal).trim() !== '') return 'fila-' + p.filaOriginal;
+  return null;
+}
+
 module.exports = async (req, res) => {
+  const idParam = req.query && req.query.id ? String(req.query.id) : '';
   const i = parseInt((req.query && req.query.i) || '', 10);
 
   let titulo = 'HILACHA - Pijamas comodas y modernas';
@@ -27,7 +37,16 @@ module.exports = async (req, res) => {
     const r = await fetch(API_DATOS);
     if (r.ok) {
       const productos = await r.json();
-      const p = Array.isArray(productos) ? productos[i] : null;
+      const lista = Array.isArray(productos) ? productos : [];
+      let p = null;
+      if (idParam) {
+        p = lista.find(function (x) { return x && x.id !== undefined && x.id !== null && String(x.id) === idParam; }) || null;
+        if (!p && idParam.indexOf('fila-') === 0) {
+          const fila = parseInt(idParam.slice(5), 10);
+          if (!isNaN(fila)) p = lista.find(function (x) { return x && Number(x.filaOriginal) === fila; }) || null;
+        }
+      }
+      if (!p && !isNaN(i)) p = lista[i] || null;
       if (p) {
         const oferta = p.precioOferta && String(p.precioOferta).trim() !== '';
         const precio = Number(oferta ? p.precioOferta : p.precio) || 0;
@@ -35,11 +54,12 @@ module.exports = async (req, res) => {
         descrip = 'Talla ' + (p.talla || 'Unica') + ' - S/. ' + precio.toLocaleString('es-PE') +
                   '. Pedidos por WhatsApp: 924 789 997.';
         if (p.foto) imagen = p.foto;
-        destino = SITE + '/?producto=' + i;
+        const k = keyOf(p);
+        destino = SITE + '/?producto=' + encodeURIComponent(k !== null ? k : i);
       }
     }
   } catch (e) {
-    // Si falla la API, se sirve el preview genérico igual.
+    // Si falla la API, se sirve el preview genÃ©rico igual.
   }
 
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
